@@ -42,7 +42,7 @@ public class Solver {
                 String w=word+map[r][c];
                 int b=binarySearch(start,stop,word);
                 if(b==-1)return;
-                if(words.get(b).equals(w)) ans.add(w);
+                if(words.get(b).equals(w)&&!ans.contains(w)) ans.add(w);
                 path.add(new int[]{r,c});
                 solve(map,r,c,ans,path,w,b,stop);
                 path.removeLast();
@@ -57,7 +57,7 @@ public class Solver {
         return false;
     }
     public boolean filter(String word) { //for filtering which words to include in solver. extend and change to whatever (ex: like only words with length >= n)
-        return word.length()>=3&&word.length()<=5;
+        return word.length()>=3;
     }
     //returns first place where start string starts showing, or -1 if it doesnt exist
     public int binarySearch(int start, int stop, String str) {
