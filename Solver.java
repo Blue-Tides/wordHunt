@@ -22,37 +22,60 @@ public class Solver {
             e.printStackTrace();
           }
     }
+    private class Location {
+        private int r;
+        private int c;
+        public int getR() {
+            return r;
+        }
+        public int getC() {
+            return c;
+        }
+        public Location(int r,int c) {
+            this.r=r;
+            this.c=c;
+        }
+        public String toString() {
+            return r+"-"+c;
+        }
+        public boolean equals(Object obj) {
+            Location l=(Location) obj;
+            return l.r==r&&l.c==c;
+        }
+    }
     //map can have null spots to support those weird ahh maps wordhunt has
     public List<String> solve(char[][] map) {
         List<String> ans=new ArrayList<String>();
         for(int r=0;r<map.length;r++) {
             for(int c=0;c<map[r].length;c++) {
-                List<int[]> path=new ArrayList<int[]>();
-                path.add(new int[]{r,c});
-                solve(map,r,c,ans,path,"",0,words.size()-1);
+                List<Location> path=new ArrayList<Location>();
+                path.add(new Location(r,c));
+                solve(map,r,c,ans,path,""+map[r][c],0,words.size()-1);
             }
         }
         return ans;
     }
-    public void solve(char[][]map,int r1,int c1,List<String>ans,List<int[]> path, String word,int start,int stop) {
+    public void solve(char[][]map,int r1,int c1,List<String>ans,List<Location> path, String word,int start,int stop) {
         for(int r=r1-1;r<=r1+1;r++) {
             if(r==-1||r==map.length) continue;
             for(int c=c1-1;c<=c1+1;c++) {
-                if(c==-1||c==map[r].length||map[r][c]==0||inPath(path,r,c)) continue;
+                if(c==-1||c==map[r].length||map[r][c]==0) continue;
+                Location loc=new Location(r,c);
+                if(inPath(path,loc)) continue;
                 String w=word+map[r][c];
-                int b=binarySearch(start,stop,word);
-                if(b==-1)return;
+                int b=binarySearch(start,stop,w);
+                if(b==-1) continue;
+                path.add(loc);
                 if(words.get(b).equals(w)&&!ans.contains(w)) ans.add(w);
-                path.add(new int[]{r,c});
                 solve(map,r,c,ans,path,w,b,stop);
                 path.removeLast();
             }
         }
     }
 
-    public boolean inPath(List<int[]> path,int r,int c) {
-        for(int[] a:path)
-            if(a[0]==r&&a[1]==c)
+    public boolean inPath(List<Location> path,Location l) {
+        for(Location a:path)
+            if(a.equals(l))
                 return true;
         return false;
     }

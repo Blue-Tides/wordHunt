@@ -1,6 +1,10 @@
 public class Driver {
     public static void main(String[] args) {
         Solver s=new Solver("Collins Scrabble Words (2019).txt");
+        /*char[][] map = {
+            {'A','R'},
+            {'O','S'}
+        };*/
         char[][] map = {
         {'R','A','R','V'},
         {'C','O','S','N'},
@@ -9,7 +13,7 @@ public class Driver {
         };
         System.out.println(s.solve(map));
         /*//Solver s=new Solver("testFile.txt");
-        int a=s.binarySearch(0,Solver.words.size()-1,"SPAINE");
+        int a=s.binarySearch(0,Solver.words.size()-1,"SOA");
         System.out.println(Solver.words.get(a));
        //System.out.println(Solver.words);*/
     }
