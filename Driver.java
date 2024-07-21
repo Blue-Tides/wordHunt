@@ -6,10 +6,10 @@ public class Driver {
             {'O','S'}
         };*/
         char[][] map = {
-        {'R','A','R','V'},
-        {'C','O','S','N'},
-        {'S','A','Y','I'},
-        {'E','T','E','O'}
+        {'L','C','Y','A'},
+        {'D','O','I','M'},
+        {'N','Y','R','R'},
+        {'E','E','N','A'}
         };
         System.out.println(s.solve(map));
         /*//Solver s=new Solver("testFile.txt");
